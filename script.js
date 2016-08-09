@@ -1,41 +1,78 @@
 function Robot () {}
-
 Robot.prototype.purpose = "To fight to the death"
 Robot.prototype.setAttack = function (amt) { this.attack = amt }
 Robot.prototype.setHealth = function (amt) { this.health = amt }
-
+Robot.prototype.setAlignment = function (string) { this.alignment = string }
 
 //SAVIORS
-function Savior () {}
-Savior.prototype.alignment = "Lawful Good"
+function Savior () {
+    this.manufacturer = "Dr. Light"
+}
 
-function MegaMan () {}
-MegaMan.prototype.weapon = "Mega Buster"
+Savior.prototype = new Robot()
 
-function ProtoMan () {}
-ProtoMan.prototype.weapon = "Proto Buster"
+//INSTANCES OF SAVIORS
+var MegaMan = new Savior()
+MegaMan.name = "Mega Man"
+MegaMan.weapon = "Mega Buster"
+MegaMan.setHealth(100)
+MegaMan.setAttack(500)
+MegaMan.setAlignment("Lawful Good")
+
+var ProtoMan = new Savior()
+ProtoMan.name = "Proto Man"
+ProtoMan.weapon = "Proto Buster"
+ProtoMan.setHealth(50)
+ProtoMan.setAttack(1000)
+ProtoMan.setAlignment("Chaotic Good")
+
+console.log("Mega Man" , MegaMan, "Proto Man", ProtoMan)
 
 //VILLAINS
 function Villain () {}
-Villain.prototype.alignment = "Chaotic Evil"
+Villain.prototype.manufacturer = "Dr. Wily"
 
-CutMan.prototype = Object.create(Villain.prototype)
-ElecMan.prototype = Object.create(Villain.prototype)
+Villain.prototype = new Robot ()
+
+//INSTANCES OF VILLAINS
+var ElecMan = new Villain()
+ElecMan.name = "Elec Man"
+ElecMan.weapon = "Elec Wave"
+ElecMan.setHealth(80)
+ElecMan.setAttack(700)
+ElecMan.setAlignment("Chaotic Evil")
+
+var GutsMan = new Villain()
+GutsMan.name = "Guts Man"
+GutsMan.weapon = "Heavy Arm"
+GutsMan.setHealth(250)
+GutsMan.setAttack(1250)
+GutsMan.setAlignment("Neutral Evil")
+
+console.log("Elec Man", ElecMan, "Guts Man", GutsMan)
 
 //MINIBOSSES
 function Miniboss () {}
-Miniboss.prototype.alignment = "Neutral Evil"
+Miniboss.prototype.manufacturer = "Unknown"
 
-YellowDevil.prototype = Object.create(Miniboss.prototype)
-Bass.prototype = Object.create(Miniboss.prototype)
+Miniboss.prototype = new Robot ()
 
-Savior.prototype = Object.create(Robot.prototype)
-Villain.prototype = Object.create(Robot.prototype)
-Miniboss.prototype = Object.create(Robot.prototype)
+//INSTANCES OF MINIBOSSES
+var YellowDevil = new Miniboss()
+YellowDevil.name = "Yellow Devil"
+YellowDevil.weapon = "Eye Beam"
+YellowDevil.setHealth(500)
+YellowDevil.setAttack(1500)
+YellowDevil.setAlignment("Lawful Neutral")
 
-MegaMan.prototype = Object.create(Savior.prototype)
-ProtoMan.prototype = Object.create(Savior.prototype)
+var Bass = new Miniboss()
+Bass.name = "Bass"
+Bass.weapon = "Bass Shot"
+Bass.setHealth(75)
+Bass.setAttack(350)
+Bass.setAlignment("Chaotic Neutral")
 
-var Roll = Object.create(Savior.prototype)
+console.log("Yellow Devil", YellowDevil, "Bass", Bass)
 
-console.log(Roll)
+
+
