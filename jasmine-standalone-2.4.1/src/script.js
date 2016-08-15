@@ -87,6 +87,13 @@ function createNewRobot () {
     console.log("createNewRobot running")
     let playerName = $("#robotName").val()
     let robotType = $("#robotType option:selected").val()
+
+    //If the user does not enter a name, this selects a random name for them
+    if (playerName === "") {
+        playerNameOptions = ["Mega Man", "Proto Man", "Bass", "Treble", "Roll", "Zero"]
+        playerName = playerNameOptions[Math.round(Math.random() * (playerNameOptions.length - 1))];
+    }
+
     _newPlayer = new Factory[robotType]
     _newPlayer.name = playerName
     console.log("New Player", _newPlayer)
