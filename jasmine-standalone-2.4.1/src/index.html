@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Battledome Death Squad</title>
+    <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>BEGIN THE BATTLE</h1>
+    <div id="playerOne" class="row">
+        <form>
+            <label>Name: <input type="text" name="robotName" id="robotName"></label>
+            <label>Select Your Robot Model: <select id="robotType">
+                <optgroup label="Savior">
+                    <option value="ArmCannon">Arm Cannon</option>
+                    <option value="Sword">Sword</option>
+                </optgroup>
+                <optgroup label="Villain">
+                    <option value="Electricity">Electricity</option>
+                    <option value="Blades">Blades</option>
+                </optgroup>
+                <optgroup label="Rogue">
+                    <option value="Dog">Dog</option>
+                    <option value="Agent">Agent</option>
+                </optgroup>
+            </select></label>
+        </form>
+        <button id="buildButton">Build Your Robot!</button>
+    </div>
+
+
+    <div id="battleDome" class="row battledome">
+        <div id="robotOneOutput" class="col-md-4"></div>
+        <div id="buttonOutput" class="col-md-4"></div>
+        <div id="robotTwoOutput" class="col-md-4"></div>
+    </div>
+
+</div>
+<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
