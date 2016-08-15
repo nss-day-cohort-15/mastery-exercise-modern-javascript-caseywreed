@@ -2,17 +2,16 @@
 <html>
 <head>
     <title>Robot Battledome Death Squad</title>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div class="container">
     <h1>BEGIN THE BATTLE</h1>
     <div id="playerOne" class="row">
-        <h1>Select Your Type!</h1>
         <form>
             <label>Name: <input type="text" name="robotName" id="robotName"></label>
-            <select id="robotType">
+            <label>Select Your Robot Model: <select id="robotType">
                 <optgroup label="Savior">
                     <option value="ArmCannon">Arm Cannon</option>
                     <option value="Sword">Sword</option>
@@ -25,7 +24,7 @@
                     <option value="Dog">Dog</option>
                     <option value="Agent">Agent</option>
                 </optgroup>
-            </select>
+            </select></label>
         </form>
         <button id="buildButton">Build Your Robot!</button>
     </div>
@@ -38,7 +37,7 @@
     </div>
 
 </div>
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

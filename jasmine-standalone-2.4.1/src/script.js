@@ -130,9 +130,9 @@ function renderRobots () {
 function checkForHealth () {
     if (_newPlayer.health <= 0 || _newEnemy.health <= 0) {
         if (_newPlayer.health > _newEnemy.health) {
-            alert(`You win, ${_newPlayer.name}! You've defeated ${_newEnemy.name}!`)
+            alert(`You win, ${_newPlayer.name}! You've defeated ${_newEnemy.name} with your ${_newPlayer.weapon}!`)
         }   else {
-            alert(`You lose, ${_newPlayer.name}... You were defeated by ${_newEnemy.name}`)
+            alert(`You lose, ${_newPlayer.name}... You were defeated by ${_newEnemy.name} and their ${_newEnemy.weapon}`)
         }
     }
 }
@@ -150,3 +150,11 @@ function robotAttack () {
 $("#buildButton").on("click", beginBattle)
 
 }(RobotBattle || {});
+
+// For Jasmine Testing only
+
+function helloWorld() {
+    return "Hello world!";
+}
+
+// Testing Section End
