@@ -1,3 +1,18 @@
 h1 {
     color: red;
 }
+
+.battleCard {
+    border: 3px solid black;
+    border-radius: 3px;
+    box-shadow: 50px;
+    min-width: 100px;
+}
+
+.roboStats {
+    margin: 20px;
+}
+
+.battledome {
+    margin-top: 25px;
+}

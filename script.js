@@ -1,78 +1,152 @@
-function Robot () {}
-Robot.prototype.purpose = "To fight to the death"
-Robot.prototype.setAttack = function (amt) { this.attack = amt }
-Robot.prototype.setHealth = function (amt) { this.health = amt }
-Robot.prototype.setAlignment = function (string) { this.alignment = string }
+var RobotBattle = function (robotbattle) {
+
+var _robotName = null
+var _robotType = null
+var _newPlayer = null
+var _newEnemy = null
+
+var Factory = {}
+
+Factory.Robot = function() {
+    this.purpose = "To fight to the death"
+}
+Factory.Robot.prototype.setAttack = function (amt) { this.attack = amt }
+Factory.Robot.prototype.setHealth = function (amt) { this.health = amt }
+Factory.Robot.prototype.dealDamage = function (target) {target.health -= this.attack}
+// Factory.Robot.prototype.takeDamage = function (target) {target}
 
 //SAVIORS
-function Savior () {
+Factory.Savior = function () {
     this.manufacturer = "Dr. Light"
 }
+Factory.Savior.prototype = new Factory.Robot()
 
-Savior.prototype = new Robot()
+Factory.ArmCannon = function () {
+    this.setAttack.call(this, 100)
+    this.setHealth.call(this, 1000)
+    this.weapon = "Mega Buster"
+}
+Factory.ArmCannon.prototype = new Factory.Savior()
 
-//INSTANCES OF SAVIORS
-var MegaMan = new Savior()
-MegaMan.name = "Mega Man"
-MegaMan.weapon = "Mega Buster"
-MegaMan.setHealth(100)
-MegaMan.setAttack(500)
-MegaMan.setAlignment("Lawful Good")
+Factory.Sword = function () {
+    this.setAttack.call(this, 150)
+    this.setHealth.call(this, 900)
+    this.weapon = "Beam Sword"
+}
+Factory.Sword.prototype = new Factory.Savior()
 
-var ProtoMan = new Savior()
-ProtoMan.name = "Proto Man"
-ProtoMan.weapon = "Proto Buster"
-ProtoMan.setHealth(50)
-ProtoMan.setAttack(1000)
-ProtoMan.setAlignment("Chaotic Good")
+// VILLAINS
+Factory.Villain = function () {
+    this.manufacturer = "Dr. Wily"
+}
+Factory.Villain.prototype = new Factory.Robot()
 
-console.log("Mega Man" , MegaMan, "Proto Man", ProtoMan)
+Factory.Electricity = function () {
+    this.setAttack.call(this, 150)
+    this.setHealth.call(this, 700)
+    this.weapon = "Elec Beam"
+}
+Factory.Electricity.prototype = new Factory.Villain()
 
-//VILLAINS
-function Villain () {}
-Villain.prototype.manufacturer = "Dr. Wily"
+Factory.Blades = function () {
+    this.setAttack.call(this, 175)
+    this.setHealth.call(this, 700)
+    this.weapon = "Rolling Cutter"
+}
+Factory.Blades.prototype = new Factory.Villain()
 
-Villain.prototype = new Robot ()
+//ROGUES
+Factory.Rogue = function () {
+    this.manufacturer = "Unknown Future Scientist"
+}
+Factory.Rogue.prototype = new Factory.Robot()
 
-//INSTANCES OF VILLAINS
-var ElecMan = new Villain()
-ElecMan.name = "Elec Man"
-ElecMan.weapon = "Elec Wave"
-ElecMan.setHealth(80)
-ElecMan.setAttack(700)
-ElecMan.setAlignment("Chaotic Evil")
+Factory.Dog = function () {
+    this.setAttack.call(this, 125)
+    this.setHealth.call(this, 600)
+    this.weapon = "Metal Fangs"
+}
+Factory.Dog.prototype = new Factory.Rogue()
 
-var GutsMan = new Villain()
-GutsMan.name = "Guts Man"
-GutsMan.weapon = "Heavy Arm"
-GutsMan.setHealth(250)
-GutsMan.setAttack(1250)
-GutsMan.setAlignment("Neutral Evil")
+Factory.Agent = function () {
+    this.setAttack.call(this, 200)
+    this.setHealth.call(this, 650)
+    this.weapon = "Bass Rumble"
+}
+Factory.Agent.prototype = new Factory.Rogue()
 
-console.log("Elec Man", ElecMan, "Guts Man", GutsMan)
+var attackButton = `<button id="attackButton">ATTACK!</button>`
 
-//MINIBOSSES
-function Miniboss () {}
-Miniboss.prototype.manufacturer = "Unknown"
+function beginBattle () {
+    createNewRobot()
+    createNewEnemy()
+    renderRobots()
+}
 
-Miniboss.prototype = new Robot ()
+function createNewRobot () {
+    console.log("createNewRobot running")
+    let playerName = $("#robotName").val()
+    let robotType = $("#robotType option:selected").val()
+    _newPlayer = new Factory[robotType]
+    _newPlayer.name = playerName
+    console.log("New Player", _newPlayer)
+}
 
-//INSTANCES OF MINIBOSSES
-var YellowDevil = new Miniboss()
-YellowDevil.name = "Yellow Devil"
-YellowDevil.weapon = "Eye Beam"
-YellowDevil.setHealth(500)
-YellowDevil.setAttack(1500)
-YellowDevil.setAlignment("Lawful Neutral")
+function createNewEnemy () {
+    console.log("createNewEnemy running")
+    enemyNameOptions = ["Paul", "John", "George", "Ringo"]
+    var enemyName = enemyNameOptions[Math.round(Math.random() * (enemyNameOptions.length - 1))];
+    enemyTypeOptions = ["ArmCannon", "Sword", "Electricity", "Blades", "Dog", "Agent"]
+    var enemyType = enemyTypeOptions[Math.round(Math.random() * (enemyTypeOptions.length - 1))];
+    _newEnemy = new Factory[enemyType]
+    _newEnemy.name = enemyName
+    console.log("New Enemy", _newEnemy)
+}
 
-var Bass = new Miniboss()
-Bass.name = "Bass"
-Bass.weapon = "Bass Shot"
-Bass.setHealth(75)
-Bass.setAttack(350)
-Bass.setAlignment("Chaotic Neutral")
+function renderRobots () {
+    console.log("renderRobots is running")
+    $("#robotOneOutput").html(`
+        <section class="battleCard">
+            <article class="roboStats">
+                <p>Name: ${_newPlayer.name}</p>
+                <p>Attack: ${_newPlayer.attack}</p>
+                <p>Health: ${_newPlayer.health}</p>
+            </article>
+        </section>
+    `)
+    $("#buttonOutput").html(attackButton)
+    $("#robotTwoOutput").html(`
+        <section class="battleCard">
+            <article class="roboStats">
+                <p>Name: ${_newEnemy.name}</p>
+                <p>Attack: ${_newEnemy.attack}</p>
+                <p>Health: ${_newEnemy.health}</p>
+            </article>
+        </section>
+    `)
+    $("#attackButton").on("click", robotAttack)
+}
 
-console.log("Yellow Devil", YellowDevil, "Bass", Bass)
+function checkForHealth () {
+    if (_newPlayer.health <= 0 || _newEnemy.health <= 0) {
+        if (_newPlayer.health > _newEnemy.health) {
+            alert(`You win, ${_newPlayer.name}! You've defeated ${_newEnemy.name}!`)
+        }   else {
+            alert(`You lose, ${_newPlayer.name}... You were defeated by ${_newEnemy.name}`)
+        }
+    }
+}
 
+function robotAttack () {
+    _newPlayer.dealDamage(_newEnemy)
+    _newEnemy.dealDamage(_newPlayer)
+    renderRobots()
+    checkForHealth()
+}
 
+//FUTURE NEEDS
+//renderRobots to print stats
 
+$("#buildButton").on("click", beginBattle)
+
+}(RobotBattle || {});
